@@ -36,7 +36,7 @@ export default class StopClock extends React.Component {
         return ( 
             <div className="counter">
                 <div className="counter-title">
-                    It's timer. Goog luck. :)
+                    It's timer. Good luck. :)
                 </div>
                 <div className="counter-time"> 
                     {this.state.currentTime.toLocaleTimeString()}
