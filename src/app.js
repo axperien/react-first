@@ -26,10 +26,10 @@ export default class StopClock extends React.Component {
 
     startTime = (date = this.state.currentTime) => {
         if (this.state.isStopped) {
-            this.setState(prevState => ({
+            this.setState({
                 isStopped: false,
                 timer: setInterval(() => this.timerTick(date), 1000)
-            }));
+            });
         }
     }
 
