@@ -38,10 +38,13 @@ export default class StopClock extends React.Component {
 
     resetTime = () => {
         if (this.state.isStopped) 
-            this.setState({currentTime: moment()});
+            this.changeTime(moment())
     }
 
-    changeTime = date => this.setState({currentTime: date});
+    changeTime = date => {
+        console.log(date)
+        this.setState({currentTime: date})
+    };
 
     render() {
         return ( 
