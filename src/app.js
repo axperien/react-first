@@ -22,7 +22,7 @@ export default class StopClock extends React.Component {
         this.timer = setInterval(() => 
             this.changeTime(date.add(1, 's')), this.state.interval)
     }
-
+    
     stopTime = () => {
         clearInterval(this.timer);
         this.setState({isStopped: true});
@@ -41,10 +41,7 @@ export default class StopClock extends React.Component {
             this.changeTime(moment())
     }
 
-    changeTime = date => {
-        console.log(date)
-        this.setState({currentTime: date})
-    };
+    changeTime = date => this.setState({currentTime: date})
 
     render() {
         return ( 
