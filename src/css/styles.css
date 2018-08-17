@@ -54,8 +54,34 @@ html {
     border-color: #2c85de;
 }
 
+.counter-button__disabled{
+    background: #b7babd;
+    border-color: #b7babd;
+    pointer-events: none;
+}
+
 .counter-status {
     font-size: 12px;
     color: #333;
     padding: 15px 0 15px;
+}
+
+.datepicker-title{
+    padding: 30px 0 10px;
+}
+
+.datepicker .react-datepicker__input-container input {
+    display: block;
+    padding: 8px 15px;
+    font-size: 16px;
+    line-height: normal;
+    color: #495057;
+    background-color: #fff;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+}
+
+.datepicker .react-datepicker__input-container input:disabled{
+    background-color: #dad8d8;
+    cursor: not-allowed;
 }
