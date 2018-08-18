@@ -26,18 +26,18 @@ html {
     line-height: normal;
 }
 
-.counter-title {
+.counter__title {
     font-size: 60px;
     line-height: normal;
     padding-bottom: 30px;
 }
 
-.counter-time {
+.counter__time {
     font-size: 30px;
     line-height: normal;
 }
 
-.counter-button {
+.counter__button {
     display: inline-block;
     color: #fff;
     background-color: #545b62;
@@ -49,25 +49,25 @@ html {
     outline: none;
 }
 
-.counter-button:hover{
+.counter__button:hover{
     background: #2c85de;
     border-color: #2c85de;
 }
 
-.counter-button__disabled{
+.counter__button:disabled{
     background: #b7babd;
     border-color: #b7babd;
     pointer-events: none;
 }
 
-.counter-status {
+.counter__status {
     font-size: 12px;
     color: #333;
     padding: 15px 0 15px;
 }
 
-.datepicker-title{
-    padding: 30px 0 10px;
+.title{
+    padding: 20px 0 10px;
 }
 
 .datepicker .react-datepicker__input-container input {
