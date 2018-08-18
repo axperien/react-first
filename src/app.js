@@ -11,69 +11,87 @@ export default class StopClock extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            currentTime: moment(),
+            currentDate: moment(),
             interval: 1000,
             isStopped: true
         };
-        this.changeTime = this.changeTime.bind(this);
     }
 
-    timerTick = date => {
+    timerTick = (date) => {
         this.timer = setInterval(() => 
-            this.changeTime(date.add(1, 's')), this.state.interval)
+            this.changeDate(date.add(1, 's')), this.state.interval);
     }
+
+    changeDate = (date) => 
+        this.setState({currentDate: date});
     
-    stopTime = () => {
+    handlerStopDate = () => {
         clearInterval(this.timer);
         this.setState({isStopped: true});
     }
 
-    startTime = (date) => {
-        if (this.state.isStopped) {
-            const newDate = date || this.state.currentTime;
+    handlerStartDate = () => {
+        const { isStopped, currentDate } = this.state;
+
+        if (isStopped) {
             this.setState({isStopped: false});
-            this.timerTick(newDate);
+            this.timerTick(currentDate);
         }
     }
 
-    resetTime = () => {
+    handlerResetDate = () => {
         if (this.state.isStopped) 
-            this.changeTime(moment())
+            this.changeDate(moment());
     }
 
-    changeTime = date => this.setState({currentTime: date})
+    handlerChooseUserDate = (date) => 
+        this.changeDate(date.set({second:0,millisecond:0}));
+
+    handlerSetInterval = (e) => {
+        this.setState({interval: e.currentTarget.value});
+    }
 
     render() {
-        const { isStopped, currentTime } = this.state;
+        const { isStopped, currentDate, interval } = this.state;
 
         return ( 
             <div className="counter">
-                <div className="counter-title">
-                    It`s timer. Good luck. :)
+                <div className="counter__title">
+                    It`s date timer. Good luck. :)
                 </div>
-                <div className="counter-time"> 
-                    {currentTime.format('Do MMMM YYYY, HH:mm:ss')}
+                <div className="counter__time"> 
+                    {currentDate.format('Do MMMM YYYY, HH:mm:ss')}
                 </div>
-                <div className="counter-status">
+                <div className="counter__status">
                     {isStopped 
                         ? (<span style={{color: 'red'}}>Time current stop</span>) 
                         : (<span style={{color: 'green'}}>Time current started</span>) }
                 </div>
-                <div className="counter-buttons">
-                    <button onClick = {() => this.stopTime()} className="counter-button">Stop</button> 
-                    <button onClick = {() => this.startTime()} className="counter-button">Start</button>
-                    {isStopped 
-                        ? (<button onClick = {() => this.resetTime()} className="counter-button">Reset</button>) 
-                        : (<button  className="counter-button counter-button__disabled">Reset</button>)}                     
+                <div className="counter__buttons">
+                    <button onClick = {() => this.handlerStopDate()} className="counter__button">Stop</button> 
+                    <button onClick = {() => this.handlerStartDate()} className="counter__button">Start</button>
+                    <button onClick = {() => this.handlerResetDate()} disabled={!isStopped} className="counter__button">Reset</button>                   
                 </div> 
+                <div>
+                    <div className="title">Change timer interval</div>
+                    <select 
+                        onChange={this.handlerSetInterval}
+                        value={interval}
+                        disabled={!isStopped}
+                        >
+                        <option>1000</option>
+                        <option>500</option>
+                        <option>100</option>
+                    </select>
+                </div>
                 <div className="datepicker">
-                    <div className="datepicker-title">Choose your time:</div>
+                    <div className="title">Choose your time:</div>
                     <DatePicker
-                        selected={currentTime}
-                        onChange={this.changeTime}
+                        selected={currentDate}
+                        onChange={this.handlerChooseUserDate}
                         disabled={!isStopped}
                         showTimeSelect
-                        timeFormat="HH:mm"
+                        timeFormat="HH:mm:ss"
                         timeIntervals={15}
                         dateFormat="LLL"
                         timeCaption="time"
