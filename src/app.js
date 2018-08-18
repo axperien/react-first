@@ -44,32 +44,34 @@ export default class StopClock extends React.Component {
     changeTime = date => this.setState({currentTime: date})
 
     render() {
+        const { isStopped, currentTime } = this.state;
+
         return ( 
             <div className="counter">
                 <div className="counter-title">
                     It`s timer. Good luck. :)
                 </div>
                 <div className="counter-time"> 
-                    {this.state.currentTime.format('Do MMMM YYYY, HH:mm:ss')}
+                    {currentTime.format('Do MMMM YYYY, HH:mm:ss')}
                 </div>
                 <div className="counter-status">
-                    {this.state.isStopped 
+                    {isStopped 
                         ? (<span style={{color: 'red'}}>Time current stop</span>) 
                         : (<span style={{color: 'green'}}>Time current started</span>) }
                 </div>
                 <div className="counter-buttons">
                     <button onClick = {() => this.stopTime()} className="counter-button">Stop</button> 
                     <button onClick = {() => this.startTime()} className="counter-button">Start</button>
-                    {this.state.isStopped 
+                    {isStopped 
                         ? (<button onClick = {() => this.resetTime()} className="counter-button">Reset</button>) 
                         : (<button  className="counter-button counter-button__disabled">Reset</button>)}                     
                 </div> 
                 <div className="datepicker">
                     <div className="datepicker-title">Choose your time:</div>
                     <DatePicker
-                        selected={this.state.currentTime}
+                        selected={currentTime}
                         onChange={this.changeTime}
-                        disabled={!this.state.isStopped}
+                        disabled={!isStopped}
                         showTimeSelect
                         timeFormat="HH:mm"
                         timeIntervals={15}
